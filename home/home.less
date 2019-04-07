@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.search {
+  width: 70vw;
+}
+
+.search-input-out {
+  position: relative;
+  .search-btn-input {
+    background-color: #fff;
+    border-radius: 5vw;
+    box-shadow: 2px 2px 5vw rgba(0, 0, 0, 0.08);
+  }
+}
+
+.search-btn-input {
+  display: flex;
+  position: relative;
+  .se-select {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    width: 14vw;
+    height: 10vw;
+    cursor: pointer;
+    transition: background ease 0.2s;
+    border-radius: 10vw 0 0 10vw;
+    background-color: #fff;
+    box-shadow: -2px -2px 5vw rgba(0, 0, 0, 0.06);
+    &:hover {
+      background-color: #f2f2f2;
+    }
+    .se-select-img {
+      width: 85%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 60%;
+    }
+    .se-select-triangle {
+      position: absolute;
+      top: 50%;
+      right: 1vw;
+      width: 0;
+      margin-top: -3px;
+      border-top: solid 8px rgba(0, 0, 0, 0.1);
+      border-right: solid 5px transparent;
+      border-left: solid 5px transparent;
+    }
+    img {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .search-input {
+    flex: 1;
+    border-radius: 0 10vw 10vw 0;
+    font-size: 3.5vw;
+    font-weight: 300;
+    line-height: 10vw;
+    box-sizing: border-box;
+    margin-right: 5vw;
+    height: 10vw;
+    color: #555;
+    border: none;
+    outline: 0;
+    background-color: #fff;
+    text-indent: 5px;
+  }
+}
+
+.se-all {
+  position: absolute;
+  z-index: 10000;
+  top: calc(10vw + 5px);
+  overflow: hidden;
+  height: auto;
+  border-radius: 3vw;
+  background-color: #fff;
+  box-shadow: 2px 2px 5vw rgba(0, 0, 0, 0.08);
+  .se-select-item {
+    font-size: 12px;
+    display: flex;
+    margin: 0;
+    padding: 2vw 5vw 2vw 2.5vw;
+    cursor: pointer;
+    transition: background ease 0.2s;
+    color: #555;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.03);
+    align-items: center;
+    &:hover {
+      background-color: #f2f2f2;
+    }
+  }
+  .se-select-item-img {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}

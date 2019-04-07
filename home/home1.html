@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="renderer" content="webkit"/>
+  <meta name="robots" content="all"/>
+  <title>主页</title>
+  <link rel="stylesheet" href="./home.css">
+</head>
+<body>
+  <header></header>
+  <main>
+    <section class="search">
+      <!--<div class="search-type-out">
+        <div id="search-type" class="ISSHOWSEARCHTYPE">
+          <div class="search-type-in">
+            <li class="se-type-li se-type-li-select-true">网页</li>
+            <li class="se-type-li se-type-li-select-false">图片</li>
+            <li class="se-type-li se-type-li-select-false">新闻</li>
+            <li class="se-type-li se-type-li-select-false">视频</li>
+            <li class="se-type-li se-type-li-select-false">地图</li>
+          </div>
+        </div>
+      </div>-->
+      <div class="search-input-out">
+        <div class="search-btn-input se-btn-show-false">
+          <div class="se-select" data-search="bing">
+            <div id="se-select-img" class="se-select-img"
+                 style="background-image: url(https://basic-static-server.infinitynewtab.com/search-logos/bing.png?imageView2/0/format/webp/q/48/v/1);">
+            </div>
+            <div class="se-select-triangle"></div>
+          </div>
+          <input type="text" id="search-input" autocomplete="off" autofocus="autofocus" placeholder="输入并搜索..."
+                 class="search-input">
+          <div class="se-button"></div>
+        </div>
+        <div class="se-hover" style="display: none;"></div>
+        <div class="se-all" style="display: none;" tabindex="-1">
+          <li class="se-select-item" data-search="bing">
+            <div class="se-select-item-img"
+                 style="background-image: url(https://basic-static-server.infinitynewtab.com/search-logos/bing.png?imageView2/0/format/webp/q/48/v/1);"></div>
+            <div class="t-o se-select-name">必应</div>
+          </li>
+          <li class="se-select-item" data-search="google">
+            <div class="se-select-item-img"
+                 style="background-image: url(https://basic-static-server.infinitynewtab.com/search-logos/google.png?imageView2/0/format/webp/q/48/v/1)"></div>
+            <div class="t-o se-select-name">谷歌</div>
+          </li>
+          <li class="se-select-item" data-search="baidu">
+            <div class="se-select-item-img"
+                 style="background-image: url(https://basic-static-server.infinitynewtab.com/search-logos/baidu.png?imageView2/0/format/webp/q/48/v/1);"></div>
+            <div class="t-o se-select-name">百度</div>
+          </li>
+          <!--<li class="se-select-item">
+            <div class="se-select-item-img se-select-add-img"></div>
+            <div class="t-o se-select-name se-add-desc">添加搜索引擎</div>
+          </li>-->
+        </div>
+        <div class="search-suggestion-out search-suggestion-out-show-true" style="display: none;"></div>
+      </div>
+    </section>
+  </main>
+  <footer></footer>
+  <script>
+    !function () {
+      const searchEngines = [{
+        name: 'google',
+        search: 'https://www.google.com/search?q=%s'
+      }, {
+        name: 'bing',
+        search: 'https://cn.bing.com/search?q=%s'
+      }, {
+        name: 'baidu',
+        search: 'https://www.baidu.com/s?ie=UTF-8&wd=%s'
+      }];
+
+      const seSelect = document.querySelector('.se-select');
+      const selectAll = document.querySelector('.se-all');
+      const selectImg = document.querySelector('.se-select-img');
+      const searchInput = document.querySelector('.search-input');
+
+      seSelect.addEventListener('click', () => {
+        const display = getComputedStyle(selectAll).display;
+        selectAll.style.display = display === 'none' ? 'block' : 'none'
+      })
+
+      searchInput.addEventListener('keyup', (e) => {
+        if (e.keyCode === 13) {
+          e.preventDefault()
+          const name = seSelect.getAttribute('data-search');
+          const search = searchEngines.find(engine => engine.name === name).search;
+          const link = search.replace(/%s/, e.target.value);
+          location.href = link
+        }
+      })
+
+
+      Array.from(document.querySelectorAll('.se-select-item')).forEach(ele => {
+        ele.addEventListener('click', (e) => {
+          selectImg.setAttribute('style', e.currentTarget.querySelector('.se-select-item-img').getAttribute('style'))
+          seSelect.setAttribute('data-search', e.currentTarget.getAttribute('data-search'))
+          selectAll.style.display = 'none'
+        })
+      })
+
+      document.addEventListener("click", function ({target}) {
+        if (!(target.closest(".se-all") || target.closest('.se-select'))) {
+          selectAll.style.display = 'none'
+        }
+      });
+
+
+      function delegate(event, selector, callback) {
+        document.addEventListener(event, ({target}) => {
+          if (target.matches(selector)) {
+            callback && callback(target);
+          }
+        });
+      }
+    }()
+  </script>
+</body>
+</html>
